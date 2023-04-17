@@ -1,4 +1,4 @@
-from firmware import packet, to_bool, twos_complement
+from firmware import packet, to_bool, twos_complement, bin_to_int, to_int
 import struct
 
 user_input = input("Press 'H' for hex input and 'P' for packet input\n")
@@ -12,30 +12,23 @@ if user_input=='H':
     print(p)
 
 elif user_input=="P":
-    """
+
     pt = input("packet_type:")
     pv = input("packet_version:")
     teuwh = input("total_energy_used_watt_hours:")
     tdms = input("time_drift_milli_seconds:")
-    giw = input("geyser_is_warm:")
-    gidp = input("geyser_is_drawing_power:")
-    """
-    pt = 1
-    pv = 0
-    teuwh = 4552
-    tdms = 2003
-    giw = False
-    gidp = True
-    pt = struct.pack('b',pt)
+    giw = input("geyser_is_warm (True/False):")
+    gidp = input("geyser_is_drawing_power (True/False):")
+    pt = struct.pack('b',int(pt))
     s = pt.hex()
-    pv = struct.pack('b', pv)
+    pv = struct.pack('b', int(pv))
     s = s+pv.hex()
-    teuwh = struct.pack('I', teuwh)
+    teuwh = struct.pack('I', int(teuwh))
     s = s+(teuwh.hex())
-    tdms = struct.pack('i', tdms)
+    tdms = struct.pack('i', int(tdms))
     s = s+(tdms.hex())
-    giw = struct.pack('b', giw)
-    gidp = struct.pack('b', gidp)
+    giw = struct.pack('b', to_int(giw))
+    gidp = struct.pack('b', to_int(gidp))
     flags = (gidp+giw).hex()
-    print(flags)
+    s = s+'0'+str(bin_to_int(flags))
     print(s)

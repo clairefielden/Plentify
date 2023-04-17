@@ -20,7 +20,20 @@ def to_bool(x):
     else:
         return False
 
+def to_int(x):
+    if x == 'True':
+        return 1
+    else:
+        return False
+
 def twos_complement(hexstr):
     b = bytes(hexstr, 'utf-8')
     ba = binascii.a2b_hex(b)
     return(int.from_bytes(ba, byteorder='little', signed=True))
+
+def bin_to_int(binstr):
+    num = 0
+    for i in range(len(binstr)):
+        if binstr[i]!='0':
+            num = num+pow(2,int(binstr[i]))
+    return num
