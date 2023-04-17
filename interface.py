@@ -28,16 +28,16 @@ elif user_input=="P":
         gidp = input("geyser_is_drawing_power (True/False):")
         #user input, if incorrect will throw an error
 
-        pt = struct.pack('b',int(pt))
+        pt = struct.pack('B',int(pt))
         s = pt.hex()
-        pv = struct.pack('b', int(pv))
+        pv = struct.pack('B', int(pv))
         s = s+pv.hex()
         teuwh = struct.pack('I', int(teuwh))
         s = s+(teuwh.hex())
         tdms = struct.pack('i', int(tdms))
         s = s+(tdms.hex())
-        giw = struct.pack('b', to_int(giw))
-        gidp = struct.pack('b', to_int(gidp))
+        giw = struct.pack('?', to_int(giw))
+        gidp = struct.pack('?', to_int(gidp))
         #use "struct pack" feature to format strings for packing data
 
         flags = (gidp+giw).hex()
